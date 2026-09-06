@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+data/generated_posts.csv
+results/*.tsv
+results/*.txt
