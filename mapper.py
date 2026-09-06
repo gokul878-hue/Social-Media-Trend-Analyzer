@@ -6,18 +6,23 @@ import re
 import sys
 
 STOP_WORDS = {
-    "a", "about", "after", "all", "also", "an", "and", "are", "as", "at",
-    "be", "because", "been", "but", "by", "can", "could", "do", "for", "from",
-    "get", "has", "have", "how", "i", "in", "into", "is", "it", "its", "just",
-    "more", "new", "not", "of", "on", "or", "our", "out", "so", "than", "that",
-    "the", "their", "they", "this", "to", "today", "using", "was", "we", "what",
-    "when", "which", "who", "will", "with", "you", "your"
+    "a", "about", "across", "after", "all", "also", "an", "and", "are", "as", "at",
+    "be", "because", "been", "but", "by", "can", "changing", "continue", "continues",
+    "could", "create", "creates", "discuss", "discussing", "do", "experiment",
+    "experimenting", "for", "from", "future", "get", "has", "have", "help", "helps",
+    "how", "i", "idea", "ideas", "in", "interesting", "into", "is", "it", "its",
+    "just", "looks", "make", "makes", "making", "modern", "more", "need", "needed",
+    "new", "not", "of", "on", "or", "our", "out", "research", "so", "student",
+    "students", "team", "teams", "than", "that", "the", "their", "they", "think",
+    "this", "to", "today", "topic", "topics", "trend", "trends", "use", "uses",
+    "using", "was", "watch", "watching", "we", "what", "when", "which", "who",
+    "will", "with", "worth", "you", "your"
 }
 
 HASHTAG_RE = re.compile(r"(?<!\w)#[A-Za-z0-9_]+")
 URL_RE = re.compile(r"https?://\S+|www\.\S+", re.IGNORECASE)
 MENTION_RE = re.compile(r"(?<!\w)@[A-Za-z0-9_]+")
-WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9']{2,}")
+WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9']+")
 
 
 def extract_text(line):
