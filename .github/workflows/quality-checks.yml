@@ -1,0 +1,37 @@
+name: Quality Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  python-and-mapreduce:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check Python syntax
+        run: python -m compileall -q app.py mapper.py reducer.py scripts
+
+      - name: Smoke test Mapper and Reducer
+        shell: bash
+        run: |
+          printf 'post_id,text\n1,"Python #AI python"\n' \
+            | python mapper.py \
+            | sort \
+            | python reducer.py \
+            | tee /tmp/mapreduce-output.txt
+          grep -Fx $'H:#ai\t1' /tmp/mapreduce-output.txt
+          grep -Fx $'K:python\t2' /tmp/mapreduce-output.txt
